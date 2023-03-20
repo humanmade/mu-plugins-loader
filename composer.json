@@ -1,0 +1,21 @@
+{
+    "name": "humanmade/mu-plugins-loader",
+    "description": "A WordPress must-use plugin autoloader for mu-plugins in directories",
+    "type": "composer-plugin",
+    "license": "GPLv2",
+    "authors": [
+        {
+            "name": "Robert O'Rourke",
+            "email": "rob@humanmade.com"
+        }
+    ],
+    "require": {
+        "composer-plugin-api": "^2.0"
+    },
+    "require-dev": {
+        "composer/composer": "^2.0"
+    },
+    "extra": {
+        "class": "HM\\MUPluginLoader\\Plugin"
+    }
+}
