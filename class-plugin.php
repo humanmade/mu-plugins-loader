@@ -3,6 +3,7 @@
 namespace HM\MUPluginsLoader;
 
 use Composer\Composer;
+use Composer\IO\IOInterface;
 use Composer\EventDispatcher\EventSubscriberInterface;
 use Composer\Plugin\PluginInterface;
 
@@ -20,7 +21,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 	 *
 	 * @param Composer $composer The composer class.
 	 */
-	public function activate( Composer $composer ) {
+	public function activate( Composer $composer, IOInterface $io ) {
 		$this->composer = $composer;
 	}
 
