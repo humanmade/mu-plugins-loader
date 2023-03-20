@@ -45,4 +45,24 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 		file_put_contents( $dest, $loader );
 	}
 
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @param Composer $composer Composer object.
+	 * @param IOInterface $io Composer disk interface.
+	 * @return void
+	 */
+	public function deactivate( Composer $composer, IOInterface $io ) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @param Composer $composer Composer object.
+	 * @param IOInterface $io Composer disk interface.
+	 * @return void
+	 */
+	public function uninstall( Composer $composer, IOInterface $io ) {
+	}
+
 }
