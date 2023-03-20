@@ -8,7 +8,7 @@ This is useful if you want to organise and load MU plugins from a subdirectory o
 
 ## Installation
 
-```
+```sh
 composer require humanmade/mu-plugins-loader
 ```
 
@@ -26,7 +26,7 @@ The package will read your `composer.json` file during the autoload dump step of
 
 Example:
 
-```
+```json
 {
     "extra": {
         "mu-plugins": [
