@@ -51,6 +51,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 			foreach ( $extra['installer-paths'] as $path => $types ) {
 				if ( in_array( 'type:wordpress-muplugin', $types, true ) ) {
 					$hm_mu_plugins_path = str_replace( '{$name}', '', $hm_mu_plugins_path );
+					var_dump( $hm_mu_plugins_path );
 					$hm_mu_plugins_path = trim( $path, '/' );
 					break;
 				}
