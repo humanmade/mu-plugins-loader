@@ -15,7 +15,12 @@
     "require-dev": {
         "composer/composer": "^2.0"
     },
+    "autoload": {
+		"classmap": [
+			"/"
+		]
+    },
     "extra": {
-        "class": "HM\\MUPluginLoader\\Plugin"
+        "class": "HM\\MUPluginsLoader\\Plugin"
     }
 }

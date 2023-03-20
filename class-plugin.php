@@ -1,6 +1,6 @@
 <?php
 
-namespace HM\MUPluginLoader;
+namespace HM\MUPluginsLoader;
 
 use Composer\Composer;
 use Composer\EventDispatcher\EventSubscriberInterface;
