@@ -21,6 +21,6 @@
 		]
     },
     "extra": {
-        "class": "HM\\MUPluginsLoader\\Plugin"
+        "class": "HM\\MU_Plugins_Loader\\Plugin"
     }
 }

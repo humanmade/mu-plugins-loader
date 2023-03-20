@@ -1,6 +1,6 @@
 <?php
 
-namespace HM\MUPluginsLoader;
+namespace HM\MU_Plugins_Loader;
 
 use Composer\Composer;
 use Composer\IO\IOInterface;
@@ -25,23 +25,52 @@ class Plugin implements PluginInterface, EventSubscriberInterface {
 		$this->composer = $composer;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @return array
+	 */
 	public static function getSubscribedEvents() {
 		return array(
 			'post-autoload-dump' => 'installLoader',
 		);
 	}
 
+	/**
+	 * Install the loader file.
+	 *
+	 * @return void
+	 */
 	public function installLoader() {
 		$extra = $this->composer->getPackage()->getExtra();
 		$hm_mu_plugins = $extra['mu-plugins'] ?? [];
 		$hm_mu_plugins_path = $extra['mu-plugins-path'] ?? 'wp-content/mu-plugins';
 
-		$loader = file_get_contents( __DIR__ . '/loader.php' );
-		$loader = str_replace( '$hm_mu_plugins = []', '$hm_mu_plugins = ' . var_export( $hm_mu_plugins, true ), $loader );
+		// Check for a custom install path for type:wordpress-muplugin.
+		if ( ! empty( $extra['installer-paths'] ) ) {
+			foreach ( $extra['installer-paths'] as $path => $types ) {
+				if ( in_array( 'type:wordpress-muplugin', $types, true ) ) {
+					$hm_mu_plugins_path = str_replace( '{$name}', '', $hm_mu_plugins_path );
+					$hm_mu_plugins_path = trim( $path, '/' );
+					break;
+				}
+			}
+		}
 
-		$dest = dirname( $this->composer->getConfig()->get( 'vendor-dir' ) )
-			. DIRECTORY_SEPARATOR . $hm_mu_plugins_path
-			. DIRECTORY_SEPARATOR . 'loader.php';
+		$loader = file_get_contents( __DIR__ . '/loader.php' );
+
+		// Replace the list of plugins if any present.
+		if ( ! empty( $hm_mu_plugins ) ) {
+			$loader = str_replace( '$hm_mu_plugins = []', '$hm_mu_plugins = ' . var_export( $hm_mu_plugins, true ), $loader );
+		}
+
+		$dest = sprintf(
+			'%s/%s/%s',
+			dirname( $this->composer->getConfig()->get( 'vendor-dir' ) ),
+			trim( $hm_mu_plugins_path, '/' ),
+			'loader.php'
+		);
+
 		file_put_contents( $dest, $loader );
 	}
 
