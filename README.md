@@ -30,7 +30,7 @@ Example:
 {
     "extra": {
         "mu-plugins": [
-            "humanmade/authorship"
+            "authorship/plugin.php"
         ],
         "installer-paths": {
             "/content/mu-plugins/{$name}/": {
